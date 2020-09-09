@@ -1,3 +1,4 @@
+require('dotenv').config();
 const express = require('express');
 const bcrypt = require('bcryptjs');
 const jwt = require('jsonwebtoken');
@@ -46,9 +47,30 @@ router.post('/login', (req, res) => {
   User.findOne({ email }).then((user) => {
     if (!user) {
       return res.status(404).json({ error: 'Email not found' });
-    } else {
-      return res.status(200).json({ msg: 'Success' });
     }
+    // compare password with hashed password
+    bcrypt.compare(password, user.password, function (err, result) {
+      if (result) {
+        // result === true
+        // console.log(user._id);
+        const payload = {
+          id: user._id,
+        };
+
+        jwt.sign(
+          payload,
+          process.env.SECRET_KEY,
+          { expiresIn: '1d' },
+          (err, token) => {
+            res.json({
+              token: token,
+            });
+          }
+        );
+      } else {
+        return res.status(401).json({ error: 'Incorrect Password' });
+      }
+    });
   });
 });
 
