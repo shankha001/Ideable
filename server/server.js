@@ -15,7 +15,7 @@ mongoose
     useUnifiedTopology: true,
   })
   .then(() => console.log('MongoDB connected'));
-
+mongoose.set('debug', true);
 //===MIDDLEWARE===//
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());
