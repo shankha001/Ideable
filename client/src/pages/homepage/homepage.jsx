@@ -1,9 +1,10 @@
 import React from 'react';
+import SignUp from '../../components/auth/register/regsiter';
 
 function Homepage(params) {
   return (
     <React.Fragment>
-      <h1>Homepage</h1>
+      <SignUp />
     </React.Fragment>
   );
 }
