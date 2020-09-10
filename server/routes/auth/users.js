@@ -17,6 +17,7 @@ router.post('/register', (req, res) => {
       return res.status(400).json({ error: 'Email already exists !' });
     } else {
       const newUser = new User({
+        name: req.body.name,
         email: req.body.email,
         password: req.body.password,
       });
@@ -55,6 +56,7 @@ router.post('/login', (req, res) => {
         // console.log(user._id);
         const payload = {
           id: user._id,
+          name: user.name,
         };
 
         jwt.sign(

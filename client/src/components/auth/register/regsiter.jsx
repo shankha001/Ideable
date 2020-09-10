@@ -31,9 +31,10 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-export default function SignUp() {
+export default function Register() {
   const classes = useStyles();
   const [details, setDetails] = useState({
+    fname: '',
     email: '',
     password: '',
   });
@@ -46,6 +47,7 @@ export default function SignUp() {
   const handleSubmit = (e) => {
     e.preventDefault();
     const newUser = {
+      name: details.fname,
       email: details.email,
       password: details.password,
     };
@@ -64,27 +66,20 @@ export default function SignUp() {
         </Typography>
         <form className={classes.form} onSubmit={handleSubmit} noValidate>
           <Grid container spacing={2}>
-            <Grid item xs={12} sm={6}>
+            <Grid item xs={12}>
               <TextField
                 autoComplete="fname"
-                name="firstName"
+                name="fname"
                 variant="outlined"
                 fullWidth
-                id="firstName"
-                label="First Name"
+                id="fname"
+                label="Full Name"
                 autoFocus
+                onChange={handleChange}
+                value={details.fname}
               />
             </Grid>
-            <Grid item xs={12} sm={6}>
-              <TextField
-                variant="outlined"
-                fullWidth
-                id="lastName"
-                label="Last Name"
-                name="lastName"
-                autoComplete="lname"
-              />
-            </Grid>
+
             <Grid item xs={12}>
               <TextField
                 variant="outlined"
