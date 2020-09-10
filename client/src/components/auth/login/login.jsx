@@ -99,7 +99,7 @@ export default function Login() {
             color="primary"
             className={classes.submit}
           >
-            Sign Up
+            Login
           </Button>
           <Grid container justify="flex-end">
             <Grid item>
