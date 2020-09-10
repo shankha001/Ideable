@@ -1,7 +1,7 @@
 import React from 'react';
 import { Button } from '@material-ui/core';
 import { Link } from 'react-router-dom';
-
+import { logoutUser } from '../../helper';
 function Homepage() {
   return (
     <React.Fragment>
@@ -13,6 +13,9 @@ function Homepage() {
           Login
         </Button>
       </Link>
+      <Button onClick={logoutUser} variant="contained">
+        Logout
+      </Button>
     </React.Fragment>
   );
 }
