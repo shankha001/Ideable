@@ -5,7 +5,7 @@ const mongoose = require('mongoose');
 const cors = require('cors');
 const app = express();
 const passport = require('passport');
-
+const chalk = require('chalk');
 const PORT = process.env.PORT || 5000;
 
 //===MongoDB===/
@@ -14,7 +14,7 @@ mongoose
     useNewUrlParser: true,
     useUnifiedTopology: true,
   })
-  .then(() => console.log('MongoDB connected'));
+  .then(() => console.log(chalk.magenta('MongoDB connected ')));
 mongoose.set('debug', true);
 //===MIDDLEWARE===//
 app.use(bodyParser.urlencoded({ extended: true }));
@@ -31,9 +31,11 @@ app.get('/', (req, res) => {
   res.send({ msg: 'Welcome to the Backend Server' });
 });
 const users = require('./routes/auth/users');
+const notes = require('./routes/notes');
 
 app.use('/auth/users', users);
+app.use('/notes', notes);
 
 app.listen(PORT, () => {
-  console.log(`Server started on PORT:${PORT}`);
+  console.log(chalk.cyanBright(`Server started on PORT:${PORT}`));
 });
