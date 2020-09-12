@@ -1,7 +1,8 @@
 import { createStore, applyMiddleware } from 'redux';
 import logger from 'redux-logger';
 import rootReducer from './root-reducer';
-const middlewares = [];
+import ReduxThunk from 'redux-thunk';
+const middlewares = [ReduxThunk];
 
 if (process.env.NODE_ENV !== 'production') {
   middlewares.push(logger);

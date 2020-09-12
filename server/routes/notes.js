@@ -21,4 +21,13 @@ router.post('/:noteid/new', async (req, res) => {
   res.send(newNote);
 });
 
+// @route POST notes/:noteid/view
+// @desc view note
+router.get('/:noteid/view', async (req, res) => {
+  const popNotes = await User.findOne({ _id: req.params.noteid }).populate(
+    'notes'
+  );
+  res.json(popNotes.notes);
+});
+
 module.exports = router;
