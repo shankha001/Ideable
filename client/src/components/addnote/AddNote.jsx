@@ -1,68 +1,52 @@
 import React, { useState } from 'react';
-import ReactQuill from 'react-quill';
-import 'react-quill/dist/quill.snow.css';
+
 import './addnote.styles.css';
-function AddNote() {
-  const [value, setValue] = useState('');
-  const handleChange = (value) => {
-    setValue(value);
+import { connect } from 'react-redux';
+import { addNote } from '../../helper';
+import { viewNotes } from '../../helper';
+import CKEditor from '@ckeditor/ckeditor5-react';
+import ClassicEditor from '@ckeditor/ckeditor5-build-classic';
+
+function AddNote({ user }) {
+  const [title, setTitle] = useState('');
+  const [description, setDescription] = useState('');
+
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    const newNote = {
+      title: title,
+      description: description,
+    };
+    addNote(newNote, user.currentUser.id);
+    viewNotes(user.currentUser.id);
   };
   return (
     <React.Fragment>
-      <ReactQuill
-        onChange={handleChange}
-        value={value}
-        modules={AddNote.modules}
-        formats={AddNote.formats}
-        style={{
-          width: '50%',
-          height: '200px',
-          fontSize: '20px',
-          margin: '10px auto',
-        }}
-      />
+      <form onSubmit={handleSubmit}>
+        <h2>Title</h2>
+        <input
+          type="text"
+          placeholder="title"
+          onChange={(e) => setTitle(e.target.value)}
+        />
+        <h3>Note</h3>
+        <CKEditor
+          editor={ClassicEditor}
+          data="<p>Hello from CKEditor 5!</p>"
+          onChange={(event, editor) => {
+            const data = editor.getData();
+            console.log(data);
+            setDescription(data);
+          }}
+        />
+        <button type="submit">submit</button>
+      </form>
     </React.Fragment>
   );
 }
 
-//===Quill modules===//
-AddNote.modules = {
-  toolbar: [
-    [{ header: '1' }, { header: '2' }, { font: [] }],
-    [{ size: [] }],
-    ['bold', 'italic', 'underline', 'strike', 'blockquote'],
-    [
-      { list: 'ordered' },
-      { list: 'bullet' },
-      { indent: '-1' },
-      { indent: '+1' },
-    ],
-    ['link', 'image', 'video'],
-    ['clean'],
-    [{ color: [] }, { background: [] }],
-  ],
+const mapStateToProps = (state) => ({
+  user: state.user,
+});
 
-  clipboard: {
-    // toggle to add extra line breaks when pasting HTML:
-    matchVisual: false,
-  },
-};
-//====Quill formats===//
-AddNote.formats = [
-  'header',
-  'font',
-  'size',
-  'bold',
-  'italic',
-  'underline',
-  'strike',
-  'blockquote',
-  'list',
-  'bullet',
-  'indent',
-  'link',
-  'image',
-  'video',
-  'color',
-];
-export default AddNote;
+export default connect(mapStateToProps, null)(AddNote);
