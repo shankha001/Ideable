@@ -9,6 +9,7 @@ import store from './redux/store';
 import { setCurrentUser } from './redux/user/user.actions';
 import { connect } from 'react-redux';
 import Notes from './pages/notes/notes';
+import NewNote from './components/newnote/NewNote';
 
 function App({ user }) {
   useEffect(() => {
@@ -38,6 +39,7 @@ function App({ user }) {
             user.currentUser ? <Redirect to="/notes" /> : <Register />
           }
         />
+        <Route path="/newnote" component={NewNote} />
         {user.currentUser ? <Notes /> : <Redirect to="/" />}
       </Switch>
     </React.Fragment>

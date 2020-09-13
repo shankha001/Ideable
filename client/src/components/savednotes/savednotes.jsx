@@ -24,8 +24,8 @@ function SavedNotes({ user, notes }) {
               }}
               key={idx}
             >
-              <p>{note.title}</p>
-              <p>{ReactHtmlParser(note.description)}</p>
+              <h2>{note.title}</h2>
+              <h4>{ReactHtmlParser(note.description)}</h4>
             </div>
           ))
         ) : null}

@@ -1,14 +1,28 @@
 import React from 'react';
-import AddNote from '../../components/addnote/AddNote';
+import AddNote from '../../components/newnote/NewNote';
 import { connect } from 'react-redux';
 import SavedNotes from '../../components/savednotes/savednotes';
+import { Link } from 'react-router-dom';
+import { Button } from '@material-ui/core';
+import './notes.styles.scss';
+
 function Notes({ user }) {
   return (
     <React.Fragment>
-      <h1 style={{ textAlign: 'center' }}>Hello {user.currentUser.name}</h1>
-      <AddNote />
+      <div className="notes__container">
+        <h1 style={{ textAlign: 'center' }}>Hello {user.currentUser.name}</h1>
+        <Link to="/newnote">
+          <Button
+            variant="contained"
+            color="secondary"
+            style={{ float: 'right' }}
+          >
+            New Note
+          </Button>
+        </Link>
 
-      <SavedNotes />
+        <SavedNotes />
+      </div>
     </React.Fragment>
   );
 }
