@@ -39,7 +39,12 @@ function App({ user }) {
             user.currentUser ? <Redirect to="/notes" /> : <Register />
           }
         />
-        <Route path="/newnote" component={NewNote} />
+        <Route
+          exact
+          path="/newnote"
+          render={() => (user.currentUser ? <NewNote /> : <Redirect to="/" />)}
+        />
+
         {user.currentUser ? <Notes /> : <Redirect to="/" />}
       </Switch>
     </React.Fragment>

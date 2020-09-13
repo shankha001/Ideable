@@ -10,7 +10,8 @@ import { Button, Input } from '@material-ui/core';
 import Snackbar from '@material-ui/core/Snackbar';
 import MuiAlert from '@material-ui/lab/Alert';
 import { makeStyles } from '@material-ui/core/styles';
-function NewNote({ user }) {
+import { withRouter } from 'react-router-dom';
+function NewNote({ user, history }) {
   const [title, setTitle] = useState('');
   const [description, setDescription] = useState('');
   const [severity, setSeverity] = useState('');
@@ -27,8 +28,8 @@ function NewNote({ user }) {
     };
     addNote(newNote, user.currentUser.id);
     viewNotes(user.currentUser.id);
-    setSeverity('success');
-    handleClick();
+
+    history.push('/');
   };
   const [open, setOpen] = React.useState(false);
 
@@ -99,7 +100,7 @@ const mapStateToProps = (state) => ({
   user: state.user,
 });
 
-export default connect(mapStateToProps, null)(NewNote);
+export default withRouter(connect(mapStateToProps, null)(NewNote));
 function Alert(props) {
   return <MuiAlert elevation={6} variant="filled" {...props} />;
 }
