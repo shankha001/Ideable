@@ -10,6 +10,7 @@ import { setCurrentUser } from './redux/user/user.actions';
 import { connect } from 'react-redux';
 import Notes from './pages/notes/notes';
 import NewNote from './components/newnote/NewNote';
+import ViewNote from './components/viewNote/viewnote';
 
 function App({ user }) {
   useEffect(() => {
@@ -44,6 +45,7 @@ function App({ user }) {
           path="/newnote"
           render={() => (user.currentUser ? <NewNote /> : <Redirect to="/" />)}
         />
+        <Route exact path="/viewnote/:noteid" render={() => <ViewNote />} />
 
         {user.currentUser ? <Notes /> : <Redirect to="/" />}
       </Switch>

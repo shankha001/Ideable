@@ -11,6 +11,8 @@ import '../newnote/style.css';
 import Draggable from 'react-draggable';
 import DeleteIcon from '@material-ui/icons/Delete';
 import { deleteNote } from '../../helper';
+import ViewNote from '../viewNote/viewnote';
+import { Link } from 'react-router-dom';
 function SavedNotes({ user, notes }) {
   const classes = useStyles();
 
@@ -66,6 +68,9 @@ function SavedNotes({ user, notes }) {
                 >
                   <DeleteIcon style={{ color: 'red' }} />
                 </button>
+                <Link to={`/viewnote/${note._id}`}>
+                  <Button className={classes.view}>View</Button>
+                </Link>
               </Paper>
             </Draggable>
           ))
@@ -83,10 +88,11 @@ const mapStateToProps = (state) => ({
 export default connect(mapStateToProps, null)(SavedNotes);
 const useStyles = makeStyles({
   root: {
-    minWidth: 250,
+    width: 250,
     margin: '10px',
     position: 'relative',
-    minHeight: 250,
+    height: 250,
+    overflow: 'hidden',
   },
   bullet: {
     display: 'inline-block',
@@ -107,5 +113,11 @@ const useStyles = makeStyles({
     border: 'none',
     background: 'transparent',
     cursor: 'pointer',
+  },
+  view: {
+    position: 'absolute',
+    bottom: '0',
+    right: '0',
+    color: 'blue',
   },
 });

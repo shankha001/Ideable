@@ -37,6 +37,7 @@ const useStyles = makeStyles((theme) => ({
     margin: theme.spacing(2),
   },
   absolute: {
+    zIndex: '100',
     position: 'fixed',
     bottom: theme.spacing(2),
     right: theme.spacing(3),
