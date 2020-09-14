@@ -10,7 +10,7 @@ import CardContent from '@material-ui/core/CardContent';
 import Button from '@material-ui/core/Button';
 import { Paper } from '@material-ui/core';
 import '../newnote/style.css';
-
+import Draggable from 'react-draggable';
 function SavedNotes({ user, notes }) {
   const classes = useStyles();
 
@@ -41,24 +41,26 @@ function SavedNotes({ user, notes }) {
           <h2>Loading</h2>
         ) : notes.notes.length ? (
           notes.notes.map((note, idx) => (
-            <Paper className={classes.root} elevation={3}>
-              <CardContent>
-                <Typography
-                  className={classes.title}
-                  color="textSecondary"
-                  gutterBottom
-                >
-                  {note.title}
-                </Typography>
+            <Draggable>
+              <Paper className={classes.root} elevation={3}>
+                <CardContent>
+                  <Typography
+                    className={classes.title}
+                    color="textSecondary"
+                    gutterBottom
+                  >
+                    {note.title}
+                  </Typography>
 
-                <Typography variant="body2" component="p">
-                  {ReactHtmlParser(note.description)}
-                </Typography>
-              </CardContent>
-              <CardActions>
-                <Button size="small">Learn More</Button>
-              </CardActions>
-            </Paper>
+                  <Typography variant="body2" component="p">
+                    {ReactHtmlParser(note.description)}
+                  </Typography>
+                </CardContent>
+                <CardActions>
+                  <Button size="small">Learn More</Button>
+                </CardActions>
+              </Paper>
+            </Draggable>
           ))
         ) : null}
         {
