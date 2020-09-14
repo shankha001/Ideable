@@ -15,7 +15,10 @@ function Header({ user }) {
     <div className={classes.root}>
       <AppBar position="static">
         <Toolbar>
-          <Button color="inherit">Ideable</Button>
+          <Link to="/" type="button" color="white">
+            <Button style={{ color: 'white' }}>Ideable</Button>
+          </Link>
+
           <Typography variant="h6" className={classes.title}></Typography>
           {/* ===Conditional Rendering of Buttons=== */}
           {user.currentUser ? (

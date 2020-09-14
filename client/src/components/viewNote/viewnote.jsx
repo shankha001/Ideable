@@ -1,4 +1,6 @@
 import React from 'react';
+import './viewnote.styles.scss';
+
 import { withRouter, Redirect } from 'react-router-dom';
 import { connect } from 'react-redux';
 import ReactHtmlParser from 'react-html-parser';
@@ -10,9 +12,19 @@ function ViewNote({ match, notes }) {
         notes.notes.map(
           (note) =>
             note._id === match.params.noteid && (
-              <div>
-                <h1>{note.title}</h1>
-                <h2>{ReactHtmlParser(note.description)}</h2>
+              <div className="viewnote__container">
+                <h1
+                  style={{ fontFamily: 'VALORANT Regular', fontSize: '32px' }}
+                >
+                  Title
+                </h1>
+                <p style={{ fontSize: '18px' }}>{note.title}</p>
+                <h2
+                  style={{ fontFamily: 'VALORANT Regular', fontSize: '28px' }}
+                >
+                  Note
+                </h2>
+                <p>{ReactHtmlParser(note.description)}</p>
               </div>
             )
         )

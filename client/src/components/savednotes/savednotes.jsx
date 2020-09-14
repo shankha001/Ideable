@@ -11,7 +11,6 @@ import '../newnote/style.css';
 import Draggable from 'react-draggable';
 import DeleteIcon from '@material-ui/icons/Delete';
 import { deleteNote } from '../../helper';
-import ViewNote from '../viewNote/viewnote';
 import { Link } from 'react-router-dom';
 function SavedNotes({ user, notes }) {
   const classes = useStyles();
@@ -42,7 +41,7 @@ function SavedNotes({ user, notes }) {
         {notes.loading ? (
           <h2>Loading</h2>
         ) : (
-          notes.notes.length &&
+          notes.notes.length > 0 &&
           notes.notes.map((note, idx) => (
             <Draggable key={idx}>
               <Paper className={classes.root} elevation={3}>
