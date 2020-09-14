@@ -34,7 +34,7 @@ export const login = (user) => {
 export const logoutUser = () => {
   localStorage.removeItem('jwtToken');
   store.dispatch(setCurrentUser(null));
-  store.dispatch(fetchNotesSuccess(null));
+  store.dispatch(fetchNotesSuccess({}));
 };
 // @route POST /notes/${id}/new
 // @desc add Note
@@ -54,7 +54,7 @@ export const viewNotes = (id) => {
   axios
     .get(`/notes/${id}/view`)
     .then((res) => {
-      console.log(res);
+      // console.log(res);
       store.dispatch(fetchNotesSuccess(res.data));
     })
     .catch((err) => console.log(err));

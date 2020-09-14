@@ -41,9 +41,10 @@ function SavedNotes({ user, notes }) {
       >
         {notes.loading ? (
           <h2>Loading</h2>
-        ) : notes.notes.length ? (
+        ) : (
+          notes.notes.length &&
           notes.notes.map((note, idx) => (
-            <Draggable>
+            <Draggable key={idx}>
               <Paper className={classes.root} elevation={3}>
                 <CardContent>
                   <Typography
@@ -74,7 +75,7 @@ function SavedNotes({ user, notes }) {
               </Paper>
             </Draggable>
           ))
-        ) : null}
+        )}
       </div>
     </React.Fragment>
   );
