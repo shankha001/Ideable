@@ -27,13 +27,14 @@ export const login = (user) => {
       const decoded = jwt_decode(token);
       store.dispatch(setCurrentUser(decoded));
     })
-    .catch((err) => console.log(err.response.data));
+    .catch((err) => console.log(err.response));
 };
 
 // @desc Logout User
 export const logoutUser = () => {
   localStorage.removeItem('jwtToken');
   store.dispatch(setCurrentUser(null));
+  store.dispatch(fetchNotesSuccess(null));
 };
 // @route POST /notes/${id}/new
 // @desc add Note
@@ -55,6 +56,20 @@ export const viewNotes = (id) => {
     .then((res) => {
       console.log(res);
       store.dispatch(fetchNotesSuccess(res.data));
+    })
+    .catch((err) => console.log(err));
+};
+
+// @route /notes/${noteid}/${userid}/delete
+// @desc delete note
+export const deleteNote = (userid, noteid) => {
+  console.log(userid);
+  console.log(noteid);
+
+  axios
+    .post(`/notes/${noteid}/${userid}/delete`)
+    .then((res) => {
+      viewNotes(userid);
     })
     .catch((err) => console.log(err));
 };

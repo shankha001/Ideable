@@ -9,7 +9,6 @@ import ClassicEditor from '@ckeditor/ckeditor5-build-classic';
 import { Button, Input } from '@material-ui/core';
 import Snackbar from '@material-ui/core/Snackbar';
 import MuiAlert from '@material-ui/lab/Alert';
-import { makeStyles } from '@material-ui/core/styles';
 import { withRouter } from 'react-router-dom';
 function NewNote({ user, history }) {
   const [title, setTitle] = useState('');
@@ -17,7 +16,7 @@ function NewNote({ user, history }) {
   const [severity, setSeverity] = useState('');
   const handleSubmit = (e) => {
     e.preventDefault();
-    if (title == '' || description == '') {
+    if (title === '' || description === '') {
       setSeverity('warning');
       handleClick();
       return;

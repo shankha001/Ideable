@@ -2,15 +2,15 @@ import React, { useEffect } from 'react';
 import { viewNotes } from '../../helper';
 import { connect } from 'react-redux';
 import ReactHtmlParser from 'react-html-parser';
-import Card from '@material-ui/core/Card';
 import { makeStyles } from '@material-ui/core/styles';
 import Typography from '@material-ui/core/Typography';
-import CardActions from '@material-ui/core/CardActions';
 import CardContent from '@material-ui/core/CardContent';
 import Button from '@material-ui/core/Button';
 import { Paper } from '@material-ui/core';
 import '../newnote/style.css';
 import Draggable from 'react-draggable';
+import DeleteIcon from '@material-ui/icons/Delete';
+import { deleteNote } from '../../helper';
 function SavedNotes({ user, notes }) {
   const classes = useStyles();
 
@@ -56,22 +56,20 @@ function SavedNotes({ user, notes }) {
                     {ReactHtmlParser(note.description)}
                   </Typography>
                 </CardContent>
-                <CardActions>
-                  <Button size="small">Learn More</Button>
-                </CardActions>
+
+                <button
+                  type="submit"
+                  className={classes.delete}
+                  onClick={() => {
+                    deleteNote(user.currentUser.id, note._id);
+                  }}
+                >
+                  <DeleteIcon style={{ color: 'red' }} />
+                </button>
               </Paper>
             </Draggable>
           ))
         ) : null}
-        {
-          // <button
-          //   onClick={() => {
-          //     viewNotes(user.currentUser.id);
-          //   }}
-          // >
-          //   Refresh
-          // </button>
-        }
       </div>
     </React.Fragment>
   );
@@ -85,8 +83,10 @@ const mapStateToProps = (state) => ({
 export default connect(mapStateToProps, null)(SavedNotes);
 const useStyles = makeStyles({
   root: {
-    minWidth: 275,
+    minWidth: 250,
     margin: '10px',
+    position: 'relative',
+    minHeight: 250,
   },
   bullet: {
     display: 'inline-block',
@@ -98,5 +98,14 @@ const useStyles = makeStyles({
   },
   pos: {
     marginBottom: 12,
+  },
+  delete: {
+    position: 'absolute',
+    top: '0',
+    right: '0',
+    padding: '10px',
+    border: 'none',
+    background: 'transparent',
+    cursor: 'pointer',
   },
 });

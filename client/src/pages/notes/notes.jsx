@@ -1,9 +1,7 @@
 import React from 'react';
-import AddNote from '../../components/newnote/NewNote';
 import { connect } from 'react-redux';
 import SavedNotes from '../../components/savednotes/savednotes';
 import { Link } from 'react-router-dom';
-import { Button } from '@material-ui/core';
 import './notes.styles.scss';
 import Tooltip from '@material-ui/core/Tooltip';
 import AddIcon from '@material-ui/icons/Add';
